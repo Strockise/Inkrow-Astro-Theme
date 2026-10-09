@@ -3,7 +3,7 @@
     "name": "Inkrow",
     "title": "Inkrow - Astro Blog Theme",
     "description": "Inkrow is a clean, modern, and content-focused blog theme for Astro, powered by Strapi CMS. Whether you’re a solo writer, a content team, or an agency building a blog site, Inkrow gives you the perfect structure to share ideas, publish articles, and grow your online presence — beautifully and effortlessly.",
-    "ogImage": "/images/og-image.webp",
+    "ogImage": "/images/og-image.jpg",
     "language": "en"
   },
   "webflow": {

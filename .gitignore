@@ -23,3 +23,6 @@ dist/
 
 .DS_Store
 Thumbs.db
+
+# Marketplace listing assets (uploaded to portal.astro.build, not part of the theme)
+/marketplace/
