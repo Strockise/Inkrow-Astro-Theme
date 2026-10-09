@@ -2,6 +2,8 @@
 
 Inkrow is a clean, content-focused blog theme for [Astro](https://astro.build) 7. Articles, categories and authors are managed in [Strapi](https://strapi.io) 5 and fetched at build time.
 
+**Live demo:** https://inkrow-astro-theme.vercel.app
+
 **Pages:** Home (two variants), Blog (paginated), Categories, Authors, Contact, Search, plus detail pages for posts (`/blog-post/[slug]`), categories (`/blog-catagories/[slug]`) and authors (`/team-member/[slug]`). Utility pages: Style Guide and 404.
 
 ## Quick start

@@ -2,6 +2,8 @@
 
 A clean, content-focused blog theme for **Astro 7**, with articles, categories and authors managed in **Strapi 5**.
 
+**Live demo:** https://inkrow-astro-theme.vercel.app
+
 | Folder              | What it is                                                                 |
 | :------------------ | :------------------------------------------------------------------------- |
 | [`Astro/`](Astro)   | The Astro theme (pages, components, styles). See [Astro/README.md](Astro/README.md). |
