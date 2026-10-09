@@ -1,0 +1,3 @@
+# Vendored scripts are checked by Subresource Integrity ? never touch their line endings
+Astro/public/js/*.js -text
+
