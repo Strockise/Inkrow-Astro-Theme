@@ -1,5 +1,5 @@
 /**
- * Initial inline states that Webflow Interactions (IX2, in /js/webflow.js) animate from.
+ * Initial inline states that the interactions runtime (/js/interactions.js) animates from.
  * They must be rendered on the element, exactly as the Webflow export did, or elements flash before animating.
  */
 const transform = (x: string, y: string, scale = '1, 1') =>

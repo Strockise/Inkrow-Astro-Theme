@@ -6,9 +6,6 @@
     "ogImage": "/images/og-image.jpg",
     "language": "en"
   },
-  "webflow": {
-    "siteId": "6ac8862e03365f3b469b46c0"
-  },
   "contact": {
     "email": "hello@example.com"
   },

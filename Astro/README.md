@@ -88,13 +88,13 @@ src/
 └── pages/                 # one file per route
 public/
 ├── css/                   # theme stylesheets
-├── js/webflow.js          # interactions runtime (menus, dropdowns, scroll/hover animations)
+├── js/interactions.js     # interactions runtime (menus, dropdowns, scroll/hover animations)
 └── images/
 ```
 
 ### About the animations
 
-The design was originally built in Webflow. Its interactions (navbar, dropdowns, FAQ, scroll reveals, hover effects, marquees) run from `public/js/webflow.js`. They are keyed to the `pageId` passed to `BaseLayout` and to the `data-w-id` attributes in the markup, so keep both when editing pages. Remove a `data-w-id` attribute (and its inline `style`) to drop an animation from an element.
+The interactions (navbar, dropdowns, FAQ, scroll reveals, hover effects, marquees) run from `public/js/interactions.js` (with jQuery). They are keyed to the `pageId` passed to `BaseLayout` and to the `data-w-id` attributes in the markup, so keep both when editing pages. Remove a `data-w-id` attribute (and its inline `style`) to drop an animation from an element.
 
 ### Forms
 
@@ -104,7 +104,7 @@ The newsletter and contact forms keep the original markup and success/error stat
 
 - **Site name, description, email:** `src/config/config.json`
 - **Navigation:** `src/config/menu.json`
-- **Styles:** `public/css/inkrow-astro-theme.webflow.css`
+- **Styles:** `public/css/inkrow.css`
 - **Open Graph image:** `public/images/og-image.webp`
 
 ## Deploying

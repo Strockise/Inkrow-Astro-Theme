@@ -5,6 +5,10 @@ import { defineConfig, envField } from 'astro/config';
 export default defineConfig({
   // Set your production URL (used for canonical and Open Graph URLs)
   site: process.env.SITE_URL || 'https://example.com',
+  // keep Astro's bundled CSS as an external /_astro/*.css file instead of inlining it
+  build: {
+    inlineStylesheets: 'never',
+  },
   env: {
     schema: {
       STRAPI_URL: envField.string({ context: 'server', access: 'secret', default: 'http://localhost:1337' }),
