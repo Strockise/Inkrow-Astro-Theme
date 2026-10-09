@@ -1,0 +1,74 @@
+---
+import menu from '../config/menu.json';
+import { isCurrent } from '../lib/utils';
+
+interface Props {
+  /** "home" is the transparent navbar that sits on the Home V1 hero. */
+  variant?: 'base' | 'home';
+}
+
+const { variant = 'base' } = Astro.props;
+const path = Astro.url.pathname;
+// Webflow component-variant class; only the home variant carries it
+const v = variant === 'home' ? 'w-variant-e98ad657-3a1d-dbe9-c09b-94ece4b564c2' : null;
+const current = (url: string) => (isCurrent(url, path) ? { 'aria-current': 'page' } : {});
+const cur = (url: string) => (isCurrent(url, path) ? 'w--current' : null);
+---
+
+<div data-wf--navbar--variant={variant} data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav">
+  <div class="main-container w-container">
+    <div class="navbar-content-wrap">
+      <div class:list={['navbar-content-block', v]}>
+        <a href="/" {...current('/')} class:list={['navbar-brand-block w-nav-brand', cur('/')]}><img src="/images/Navbar-Brand.svg" loading="lazy" alt="Navbar Brand" class="navbar-brand-image" /></a>
+        <nav role="navigation" class="navbar-menu-block w-nav-menu">
+          <div class="navbar-menu-content">
+            {menu.main.map((link) => (
+              <a href={link.url} {...current(link.url)} class:list={['nav-link-block', v, 'w-inline-block', cur(link.url)]}>
+                <div class="navbar-link-text">{link.label}</div>
+                <div class:list={['nav-liner', v]}></div>
+              </a>
+            ))}
+            <div data-hover="false" data-delay="500" data-w-id="027dc476-2b71-a1d0-bb61-4d99d87765b8" class="nav-dropdown-block w-dropdown">
+              <div class="nav-dropdown w-dropdown-toggle">
+                <div class="navbar-dropdown-text">Pages</div><img src="/images/Arrow-Dropdown.svg" loading="lazy" alt="Arrow Dropdown" class="arrow-dropdown-icon" />
+              </div>
+              <nav class="nav-dropdown-navigation w-dropdown-list">
+                <div class:list={['pages-menu-wrapper', v]}>
+                  <div class="pages-menu-block">
+                    {menu.pagesMenu.map((group) => (
+                      <div class="pages-menu-item">
+                        <div class="pages-menu-header">{group.title}</div>
+                        <div class="pages-menu-links">
+                          {group.links.map((link) => (
+                            <a href={link.url} {...current(link.url)} class:list={['menu-link-block w-inline-block', cur(link.url)]}>
+                              <div class="menu-link-text">{link.label}</div>
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </nav>
+            </div>
+            <a href="/contact" class:list={['primary-button menu', v, 'w-inline-block']}>
+              <div class:list={['button-text menu', v]}>Contact</div>
+            </a>
+          </div>
+        </nav>
+        <div class="navbar-buttons-block">
+          <a href="/contact" {...current('/contact')} class:list={['primary-button nav w-inline-block', cur('/contact')]}>
+            <div class="button-text">Contact</div>
+          </a>
+          <div class:list={['menu-button', v, 'w-nav-button']}>
+            <div class:list={['menu-icon', v, 'w-embed']}><svg width="100%" height="100%" viewBox="0 0 39 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 2.0376H30.5185" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"></path>
+                <path d="M2 15.0005H37" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"></path>
+                <path d="M2 27.9636H30.5185" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"></path>
+              </svg></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

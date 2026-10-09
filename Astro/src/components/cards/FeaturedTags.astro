@@ -1,0 +1,17 @@
+---
+import type { Post } from '../../lib/content';
+import { categoryUrl, formatDate } from '../../lib/utils';
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+---
+
+<div class="featured-blog-tag">{formatDate(post.date)}</div>
+<div class="featured-blog-circle"></div>
+{post.category && <a href={categoryUrl(post.category.slug)} class="featured-blog-tag tag">{post.category.name}</a>}
+<div class="featured-blog-circle"></div>
+<div class="featured-blog-tag">{post.readTime}</div>
+<div class="featured-blog-tag side">Read</div>

@@ -1,0 +1,42 @@
+---
+import config from '../config/config.json';
+import menu from '../config/menu.json';
+import { isCurrent } from '../lib/utils';
+
+const path = Astro.url.pathname;
+const current = (url: string) => (isCurrent(url, path) ? { 'aria-current': 'page' } : {});
+const cur = (url: string) => (isCurrent(url, path) ? 'w--current' : null);
+const { poweredBy } = config.credits;
+const year = new Date().getFullYear();
+---
+
+<section class="footer">
+  <div class="w-layout-blockcontainer main-container w-container">
+    <div class="footer-content-block">
+      <div class="footer-top-content">
+        <div data-w-id="c4dc7626-f15a-3a60-8f21-8bc37b2b7374" class="footer-contact-info-block">
+          <div class="body-text-default grey">Get in touch</div>
+          <a href={`mailto:${config.contact.email}`} class="footer-contact-text">{config.contact.email}</a>
+        </div>
+        <div data-w-id="c4dc7626-f15a-3a60-8f21-8bc37b2b7379" class="footer-links">
+          {menu.footer.map((column) => (
+            <div class="footer-links-item">
+              {column.map((link) => (
+                <a href={link.url} {...current(link.url)} class:list={['footer-link-block w-inline-block', cur(link.url)]}>
+                  <div class="footer-link-text">{link.label}</div>
+                </a>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+      <div data-w-id="c4dc7626-f15a-3a60-8f21-8bc37b2b73a7" class="footer-bottom-content">
+        <a href="/" {...current('/')} class:list={['footer-brand-block w-inline-block', cur('/')]}><img src="/images/Brand-Block.svg" loading="lazy" alt="Brand Block" class="footer-brand" /></a>
+        <div class="footer-bottom-text-block">
+          <div class="footer-bottom-text">Copyright © {year} {config.site.name}, Powered by <a href={poweredBy.url} target="_blank" class="footer-span">{poweredBy.label}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

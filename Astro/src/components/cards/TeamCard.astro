@@ -1,0 +1,42 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import LinkedinIcon from '../icons/LinkedinIcon.astro';
+import InstagramIcon from '../icons/InstagramIcon.astro';
+import { ix, CMS_IMAGE_SIZES } from '../../lib/ix';
+import { authorUrl } from '../../lib/utils';
+
+interface Props {
+  author: CollectionEntry<'authors'>['data'];
+  /** Webflow interaction id for the hover reveal */
+  wId: string;
+  /** false renders the image without a profile link (second marquee row on Home V1) */
+  linked?: boolean;
+  designationClass?: string;
+}
+
+const { author, wId, linked = true, designationClass = 'body-text-default weight-200' } = Astro.props;
+const Wrapper = linked ? 'a' : 'div';
+---
+
+<div data-w-id={wId} class="team-card">
+  <Wrapper href={linked ? authorUrl(author.slug) : undefined} class:list={['team-card-content', linked && 'w-inline-block']}>{author.avatar && <img loading="lazy" src={author.avatar.src} alt={author.avatar.alt} sizes={CMS_IMAGE_SIZES} srcset={author.avatar.srcset} class="team-card-image" />}</Wrapper>
+  <div style={ix.down105} class="team-info-block">
+    <div class="team-info-text-block">
+      <div class="team-text">{author.name}</div>
+      <div class={designationClass}>{author.designation}</div>
+    </div>
+    <div class="team-community-block">
+      {author.social.linkedin && (
+        <a href={author.social.linkedin} target="_blank" rel="noopener" aria-label={`${author.name} on LinkedIn`} class="team-community-link w-inline-block">
+          <div aria-label="team-community-icon" class="team-community-icon w-embed"><LinkedinIcon /></div>
+        </a>
+      )}
+      {author.social.instagram && (
+        <a href={author.social.instagram} target="_blank" rel="noopener" aria-label={`${author.name} on Instagram`} class="team-community-link w-inline-block">
+          <div aria-label="team-community-icon" class="team-community-icon w-embed"><InstagramIcon /></div>
+        </a>
+      )}
+    </div>
+    <div class="team-bg"></div>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import Cta from '../components/Cta.astro';
+import TeamCard from '../components/cards/TeamCard.astro';
+import { getAuthors } from '../lib/content';
+import { ix } from '../lib/ix';
+
+const authors = await getAuthors();
+---
+
+<BaseLayout pageId="6ac8862e03365f3b469b46a9">
+<div id="smooth-wrapper" class="page-wrap">
+    <div id="smooth-content" class="smooth-content">
+      <Navbar variant="base" />
+      <div class="main">
+        <section class="authors-main-section">
+          <div class="w-layout-blockcontainer main-container w-container">
+            <div class="authors-main-content-block">
+              <div class="authors-header-content">
+                <div class="section-header-block flex-horizontal-space-between align-bottom">
+                  <div class="header-block width-950px">
+                    <h1 class="display-header">Meet the Writers Behind Inkrow</h1>
+                    <div class="animate-blur-display"></div>
+                  </div>
+                  <div data-w-id="0d75bc98-5b17-58ae-7ca0-2fe05b756ab6" style="-webkit-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="summery-block width-355px">
+                    <p class="body-text-default">Discover the minds shaping our stories. From sports to business, these creators bring ideas to life with passion and insight.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="authors-main-cms w-dyn-list">
+                <div role="list" class="authors-main-list w-dyn-items">
+  {authors.map((author) => (
+    <div role="listitem" class="authors-main-cms-item w-dyn-item">
+      <div data-w-id="a698ade3-1fd2-e69f-38b7-4f4cc3d27686" style={ix.up25} class="authors-cms-card">
+        <TeamCard author={author} wId="a698ade3-1fd2-e69f-38b7-4f4cc3d27687" designationClass="body-text-small opacity-70" />
+      </div>
+    </div>
+  ))}
+</div>
+{authors.length === 0 && <div class="w-dyn-empty"><div>No items found.</div></div>}
+              </div>
+            </div>
+          </div>
+        </section>
+        <Cta pageId="6ac8862e03365f3b469b46a9" />
+      </div>
+      <Footer />
+    </div>
+  </div>
+</BaseLayout>

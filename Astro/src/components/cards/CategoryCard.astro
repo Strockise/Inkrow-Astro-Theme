@@ -1,0 +1,27 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ArrowIcon from '../icons/ArrowIcon.astro';
+import { categoryUrl } from '../../lib/utils';
+
+interface Props {
+  category: CollectionEntry<'categories'>['data'];
+  /** Webflow interaction id (only the Home V1 list animates its cards on hover) */
+  wId?: string;
+}
+
+const { category, wId } = Astro.props;
+---
+
+<a data-w-id={wId} href={categoryUrl(category.slug)} class="catagory-card-item w-inline-block">
+  <div class="catagory-card-content">
+    <div class="blog-header-block">
+      <div class="blog-header">{category.name}</div>
+      <div class="body-text-default opacity-70">{category.summary}</div>
+    </div>
+  </div>
+  <div class="catagory-card-button-block">
+    <div class="catagory-card-button">
+      <div aria-label="catagories-icon" class="catagories-icon w-embed"><ArrowIcon stroke="#364908" /></div>
+    </div>
+  </div>
+</a>

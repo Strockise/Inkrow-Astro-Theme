@@ -1,0 +1,56 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Cta from '../../components/Cta.astro';
+import BlogCard from '../../components/cards/BlogCard.astro';
+import { getPosts, getCategories, type Category, type Post } from '../../lib/content';
+
+export const getStaticPaths = (async () => {
+  const [categories, posts] = await Promise.all([getCategories(), getPosts()]);
+  return categories.map((category) => ({
+    params: { slug: category.slug },
+    props: { category, posts: posts.filter((p) => p.category?.slug === category.slug) },
+  }));
+}) satisfies GetStaticPaths;
+
+const { category, posts } = Astro.props as { category: Category; posts: Post[] };
+---
+
+<BaseLayout pageId="6ac8862e03365f3b469b46a4" title={category.name} description={category.summary}>
+<div id="smooth-wrapper" class="page-wrap">
+    <div id="smooth-content" class="smooth-content">
+      <Navbar variant="base" />
+      <div class="main">
+        <section class="catagory-details-section">
+          <div class="w-layout-blockcontainer main-container mid-width w-container">
+            <div class="catagory-details-content">
+              <div class="section-header-block flex-verticle-center">
+                <div data-w-id="af031f1a-5f0f-b23e-9574-16ced478febf" style="-webkit-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="header-block">
+                  <h1 class="display-header">{category.name}</h1>
+                </div>
+              </div>
+              <div class="blog-catagory-cms-block">
+                <div class="blog-catagory-cms w-dyn-list">
+                  <div role="list" class="catagory-blog-list w-dyn-items">
+  {posts.map((post) => (
+    <div role="listitem" class="catagory-list-item w-dyn-item">
+      <div class="blog-cms-card">
+        <BlogCard post={post} ids={{ card: '664feeba-9513-1b6e-10de-60585ed76717', tag: '664feeba-9513-1b6e-10de-60585ed7671c', header: '664feeba-9513-1b6e-10de-60585ed76723', link: '664feeba-9513-1b6e-10de-60585ed76725' }} />
+      </div>
+    </div>
+  ))}
+</div>
+{posts.length === 0 && <div class="w-dyn-empty"><div>No items found.</div></div>}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <Cta pageId="6ac8862e03365f3b469b46a4" />
+      </div>
+      <Footer />
+    </div>
+  </div>
+</BaseLayout>

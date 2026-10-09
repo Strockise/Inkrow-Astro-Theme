@@ -1,0 +1,304 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import Cta from '../components/Cta.astro';
+import BlogCard from '../components/cards/BlogCard.astro';
+import CategoryCard from '../components/cards/CategoryCard.astro';
+import TeamCard from '../components/cards/TeamCard.astro';
+import FeaturedTags from '../components/cards/FeaturedTags.astro';
+import { getPosts, getAuthors, getCategories } from '../lib/content';
+import { CMS_IMAGE_SIZES } from '../lib/ix';
+import { postUrl } from '../lib/utils';
+
+const [posts, allAuthors, categories] = await Promise.all([getPosts(), getAuthors(), getCategories()]);
+const showcase = posts.filter((p) => p.isShowcase).slice(0, 1);
+const featured = posts.filter((p) => p.isFeatured && !p.isShowcase).slice(0, 2);
+const popular = categories.filter((c) => c.isPopular).slice(0, 5);
+const latest = posts.slice(0, 3);
+const authors = allAuthors.slice(0, 3);
+---
+
+<BaseLayout pageId="6ac8862e03365f3b469b46a6">
+<div class="page-wrap">
+    <Navbar variant="base" />
+    <div class="main">
+      <section class="home-v2-section">
+        <div class="w-layout-blockcontainer main-container w-container">
+          <div class="home-v2-section-content">
+            <div data-w-id="2036b13b-2a9d-2287-f60e-b3023fdc327d" class="section-header-block flex-verticle-center">
+              <div class="header-block width-1170px">
+                <div class="overflow-none">
+                  <div style="-webkit-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="header-item is-one">
+                    <h1>Inkrow is your space to  </h1>
+                  </div>
+                </div>
+                <div class="overflow-none">
+                  <div style="-webkit-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="header-item is-two">
+                    <h1 class="display-header capitalize">publish stories, ideas, <span class="span-mobile">&amp;</span><span class="span-large">and</span></h1>
+                  </div>
+                </div>
+                <div class="overflow-none">
+                  <div style="-webkit-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="header-item is-three">
+                    <h1 class="display-header capitalize">insights</h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="featured-blog-section-v2">
+        <div class="w-layout-blockcontainer main-container w-container">
+          <div class="featured-blog-v2-content">
+            <div class="showcase-blog-cms-block w-dyn-list">
+              <div role="list" class="showcase-blog-cms-list w-dyn-items">
+  {showcase.map((post) => (
+<div role="listitem" class="showcase-blog-cms-item w-dyn-item">
+                  <div data-w-id="39f50cb1-5a19-2393-381b-ab123ea22f4e" class="showcase-blog-card">
+                    <div class="showcase-blog-card-content">
+                      <div class="showcase-blog-card-main">
+                        <div class="showcase-blog-top-content">
+                          <div data-w-id="3d702459-22d7-aadc-df0d-9925219b9e1a" style="-webkit-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="showcase-tag">
+                            <div class="body-text-small">Featured Blog</div>
+                          </div>
+                          <div data-w-id="5bd26b35-1876-edbd-b4f7-362ffac3660c" style="-webkit-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="showcase-blog-tags">
+                            <FeaturedTags post={post} />
+                          </div>
+                        </div>
+                        <a href={postUrl(post.slug)} class="link-header animate w-inline-block">
+                          <div data-w-id="71b32c59-c4ba-c335-5bd6-612065e14166" style="-webkit-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="header-block">
+                            <div class="blog-showcase-header">{post.title}</div>
+                          </div>
+                        </a>
+                        <div data-w-id="c6910018-5921-a6b3-ce6b-9a1e50cfaf41" style="-webkit-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="showcase-blog-bottom-content">
+                          <div class="summery-block width-265px">
+                            <p class="body-text-default">{post.excerpt}</p>
+                          </div>
+                          <a href={postUrl(post.slug)} aria-label={post.title} class="showcase-blog-card-button w-inline-block">
+                            <div aria-label="blog-card-arrow" class="blog-card-arrow w-embed"><svg width="100%" height="100%" viewbox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 0.5C12 0.5 14.7234 4.63763 16.9497 6.86396C19.1761 9.09029 23.3137 11.8137 23.3137 11.8137M23.3137 11.8137H0.686292M23.3137 11.8137C23.3137 11.8137 19.1761 14.5371 16.9497 16.7635C14.7234 18.9898 12 23.1274 12 23.1274" stroke="currentColor" stroke-width="1.5"></path>
+                              </svg></div>
+                          </a>
+                        </div>
+                      </div>
+                      <a href={postUrl(post.slug)} class="showcase-blog-card-image-block w-inline-block">{post.cover && <img src={post.cover.src} loading="lazy" width="536" style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" alt={post.cover.alt} sizes={CMS_IMAGE_SIZES} srcset={post.cover.srcset} class="showcase-blog-card-image" />}</a>
+                    </div>
+                  </div>
+                </div>
+  ))}
+</div>
+{showcase.length === 0 && <div class="w-dyn-empty"><div>No items found.</div></div>}
+            </div>
+            <div class="featured-blog-v2-cms-block w-dyn-list">
+              <div role="list" class="featured-blog-v2-cms-list w-dyn-items">
+  {featured.map((post) => (
+<div role="listitem" class="featured-blog-v2-cms-item w-dyn-item">
+                  <div data-w-id="9d4cc527-fd5e-0461-1a67-fb42ad57c9cd" style="-webkit-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="featured-blog-v2-card">
+                    <div class="featured-blog-v2-card-content">
+                      <a href={postUrl(post.slug)} class="featured-blog-v2-card-image-block w-inline-block">{post.cover && <img src={post.cover.src} loading="lazy" style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" alt={post.cover.alt} sizes={CMS_IMAGE_SIZES} srcset={post.cover.srcset} class="featured-blog-v2-image" />}</a>
+                      <div class="featured-blog-v2-card-main-content">
+                        <div class="featured-blog-v2-card-text-content">
+                          <div data-w-id="7d66008f-6c6c-8a81-95bb-de0c292c1c2a" style="-webkit-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="featured-blog-v2-card-tag">
+                            <div class="showcase-blog-tags">
+                              <FeaturedTags post={post} />
+                            </div>
+                          </div>
+                          <a href={postUrl(post.slug)} class="link-header w-inline-block">
+                            <div data-w-id="7d66008f-6c6c-8a81-95bb-de0c292c1c30" style="-webkit-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="header-block">
+                              <div style="opacity:1" class="card-header">{post.title}</div>
+                            </div>
+                          </a>
+                        </div>
+                        <a data-w-id="7d66008f-6c6c-8a81-95bb-de0c292c1c32" style="-webkit-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0;background-color:rgba(0,0,0,0);color:rgb(54,73,8)" href={postUrl(post.slug)} aria-label={post.title} class="featured-blog-v2-card-link-block w-inline-block">
+                          <div aria-label="blog-card-arrow" class="blog-card-arrow w-embed"><svg width="100%" height="100%" viewbox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M12 0.5C12 0.5 14.7234 4.63763 16.9497 6.86396C19.1761 9.09029 23.3137 11.8137 23.3137 11.8137M23.3137 11.8137H0.686292M23.3137 11.8137C23.3137 11.8137 19.1761 14.5371 16.9497 16.7635C14.7234 18.9898 12 23.1274 12 23.1274" stroke="currentColor" stroke-width="1.5"></path>
+                            </svg></div>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+  ))}
+</div>
+{featured.length === 0 && <div class="w-dyn-empty"><div>No items found.</div></div>}
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="popular-catagory-section-v2">
+        <div class="w-layout-blockcontainer main-container min-width w-container">
+          <div class="popular-catagory-content-v2">
+            <div class="popular-header-content-v2">
+              <div class="header-block">
+                <h2 class="section-header">Popular categories</h2>
+                <div class="animate-blur"></div>
+              </div>
+              <div data-w-id="f79ef112-9437-8da2-f8ef-c131cdaa40dd" style="-webkit-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="button-block top-55px">
+                <a href="/catagories" class="primary-button w-inline-block">
+                  <div class="button-text">See all category</div>
+                </a>
+              </div>
+            </div>
+            <div class="popular-cms-block w-dyn-list">
+              <div role="list" class="popular-cms-list w-dyn-items">
+  {popular.map((category) => (
+    <div role="listitem" class="popular-cms-item w-dyn-item">
+      <CategoryCard category={category} />
+    </div>
+  ))}
+</div>
+{popular.length === 0 && <div class="w-dyn-empty"><div>No items found.</div></div>}
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="blogs-v2-section">
+        <div class="w-layout-blockcontainer main-container w-container">
+          <div class="blogs-v2-main-block">
+            <div data-w-id="7b111566-526e-c820-b641-254dc192fa34" class="blogs-v2-container">
+              <div class="blogs-v2-sticky">
+                <div class="blogs-v2-content">
+                  <div class="blogs-v2-header-content">
+                    <div class="header-block">
+                      <h2 class="section-header">Our Latest Blogs</h2>
+                      <div class="animate-blur dark-khaki"></div>
+                    </div>
+                    <div data-w-id="a0cb3414-6087-2d3e-f25e-e3cca2aa50ae" style="-webkit-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="button-block top-40px sm">
+                      <a href="/blog" class="primary-button w-inline-block">
+                        <div class="button-text">See all Writers</div>
+                      </a>
+                    </div>
+                  </div>
+                  <div data-w-id="a4b44d25-3c15-694d-358b-f8c38d2bc887" style="-webkit-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="blogs-v2-cms-block w-dyn-list">
+                    <div role="list" class="blogs-v2-cms-list w-dyn-items">
+  {latest.map((post) => (
+    <div role="listitem" class="blogs-v2-cms-item w-dyn-item">
+      <div class="blog-cms-card-v2">
+        <BlogCard post={post} ids={{ card: '73882cc4-9925-0d55-0d16-4e8ff1f8dcbf', tag: '73882cc4-9925-0d55-0d16-4e8ff1f8dcc4', header: '73882cc4-9925-0d55-0d16-4e8ff1f8dccb', link: '73882cc4-9925-0d55-0d16-4e8ff1f8dccd' }} />
+      </div>
+    </div>
+  ))}
+</div>
+{latest.length === 0 && <div class="w-dyn-empty"><div>No items found.</div></div>}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="authors-v2-section">
+        <div class="w-layout-blockcontainer main-container less-width w-container">
+          <div class="authors-v2-content">
+            <div class="section-header-block flex-horizontal-space-between">
+              <div data-w-id="5181d00f-6dfc-7d31-1440-a8f19f856966" style="-webkit-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="header-block width-800px">
+                <h2 class="section-header">Meet the Writers Behind Inkrow</h2>
+              </div>
+              <div data-w-id="7ca6b52e-2dac-6a3c-692b-5949ed0fb659" style="-webkit-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="summery-block width-355px">
+                <p class="body-text-default opacity-70">Discover the minds shaping our stories. From sports to business, these creators bring ideas to life with passion and insight.</p>
+              </div>
+            </div>
+            <div data-w-id="5d1d47b3-7f8c-a15d-e196-ee254bfbf83a" style="-webkit-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="authors-v2-cms-block w-dyn-list">
+              <div role="list" class="authors-v2-cms-list w-dyn-items">
+  {authors.map((author) => (
+    <div role="listitem" class="authors-v2-cms-item w-dyn-item">
+      <div class="authors-cms-card">
+        <TeamCard author={author} wId="883bc718-ae40-91ce-294d-fda56f711d8c" />
+      </div>
+    </div>
+  ))}
+</div>
+{authors.length === 0 && <div class="w-dyn-empty"><div>No items found.</div></div>}
+            </div>
+            <div data-w-id="1f05f7d6-a307-c8e3-803d-3695490eac0d" style="-webkit-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="authors-button-wrap">
+              <a href="/authors" class="primary-button w-inline-block">
+                <div class="button-text">See all Writers</div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="faq-section">
+        <div class="w-layout-blockcontainer main-container mid-width w-container">
+          <div class="faq-content">
+            <div class="section-header-block flex-verticle-center">
+              <div data-w-id="176ece0c-9ba7-cfbc-5ec0-fc3c64063666" style="-webkit-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="header-block width-640px">
+                <h2>Frequently asked question</h2>
+              </div>
+            </div>
+            <div class="faq-block">
+              <div data-hover="false" data-delay="800" data-w-id="91dff3d5-fdb8-f92d-1324-f8a8af2742a0" class="faq-item w-dropdown">
+                <div class="faq-toggle w-dropdown-toggle">
+                  <div class="faq-header">What is Inkrow?</div>
+                  <div class="faq-dropdown-icon w-embed"><svg width="100%" height="100%" viewbox="0 0 24 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M22 1.50008C22 1.50008 14.6352 11.5 12 11.5C9.36467 11.5 2 1.5 2 1.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg></div>
+                </div>
+                <nav class="faq-dropdown-list w-dropdown-list">
+                  <div class="faq-item-summery-block">
+                    <p class="body-text-default opacity-70">Inkrow is a modern blog website template built for Astro and Strapi CMS. It features clean design, fast performance, and easy content management for writers and readers.</p>
+                  </div>
+                </nav>
+              </div>
+              <div data-hover="false" data-delay="800" class="faq-item w-dropdown">
+                <div class="faq-toggle w-dropdown-toggle">
+                  <div class="faq-header">Can I subscribe to get new blog updates?</div>
+                  <div class="faq-dropdown-icon w-embed"><svg width="100%" height="100%" viewbox="0 0 24 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M22 1.50008C22 1.50008 14.6352 11.5 12 11.5C9.36467 11.5 2 1.5 2 1.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg></div>
+                </div>
+                <nav class="faq-dropdown-list w-dropdown-list">
+                  <div class="faq-item-summery-block">
+                    <p class="body-text-default opacity-70">Inkrow is a modern blog website template built for Astro and Strapi CMS. It features clean design, fast performance, and easy content management for writers and readers.</p>
+                  </div>
+                </nav>
+              </div>
+              <div data-hover="false" data-delay="800" class="faq-item w-dropdown">
+                <div class="faq-toggle w-dropdown-toggle">
+                  <div class="faq-header">Are the blog posts written by real authors?</div>
+                  <div class="faq-dropdown-icon w-embed"><svg width="100%" height="100%" viewbox="0 0 24 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M22 1.50008C22 1.50008 14.6352 11.5 12 11.5C9.36467 11.5 2 1.5 2 1.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg></div>
+                </div>
+                <nav class="faq-dropdown-list w-dropdown-list">
+                  <div class="faq-item-summery-block">
+                    <p class="body-text-default opacity-70">Inkrow is a modern blog website template built for Astro and Strapi CMS. It features clean design, fast performance, and easy content management for writers and readers.</p>
+                  </div>
+                </nav>
+              </div>
+              <div data-hover="false" data-delay="800" class="faq-item w-dropdown">
+                <div class="faq-toggle w-dropdown-toggle">
+                  <div class="faq-header">How can I find articles by topic?</div>
+                  <div aria-label="faq-dropdown-icon" class="faq-dropdown-icon w-embed"><svg width="100%" height="100%" viewbox="0 0 24 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M22 1.50008C22 1.50008 14.6352 11.5 12 11.5C9.36467 11.5 2 1.5 2 1.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg></div>
+                </div>
+                <nav class="faq-dropdown-list w-dropdown-list">
+                  <div class="faq-item-summery-block">
+                    <p class="body-text-default opacity-70">Inkrow is a modern blog website template built for Astro and Strapi CMS. It features clean design, fast performance, and easy content management for writers and readers.</p>
+                  </div>
+                </nav>
+              </div>
+              <div data-hover="false" data-delay="800" class="faq-item w-dropdown">
+                <div class="faq-toggle w-dropdown-toggle">
+                  <div class="faq-header">How do I contact the authors or support team?</div>
+                  <div class="faq-dropdown-icon w-embed"><svg width="100%" height="100%" viewbox="0 0 24 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M22 1.50008C22 1.50008 14.6352 11.5 12 11.5C9.36467 11.5 2 1.5 2 1.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg></div>
+                </div>
+                <nav class="faq-dropdown-list w-dropdown-list">
+                  <div class="faq-item-summery-block">
+                    <p class="body-text-default opacity-70">Inkrow is a modern blog website template built for Astro and Strapi CMS. It features clean design, fast performance, and easy content management for writers and readers.</p>
+                  </div>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <Cta pageId="6ac8862e03365f3b469b46a6" />
+    </div>
+    <Footer />
+  </div>
+</BaseLayout>

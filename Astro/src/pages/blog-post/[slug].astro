@@ -1,0 +1,97 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Cta from '../../components/Cta.astro';
+import BlogCard from '../../components/cards/BlogCard.astro';
+import { getPosts, type Post } from '../../lib/content';
+import { blocksToHtml } from '../../lib/blocks';
+import { CMS_IMAGE_SIZES } from '../../lib/ix';
+import { formatDate } from '../../lib/utils';
+
+export const getStaticPaths = (async () => {
+  const posts = await getPosts();
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    // three most recent other posts, like the original "Related Blogs" list
+    props: { post, related: posts.filter((p) => p.slug !== post.slug).slice(0, 3) },
+  }));
+}) satisfies GetStaticPaths;
+
+const { post, related } = Astro.props as { post: Post; related: Post[] };
+---
+
+<BaseLayout pageId="6ac8862e03365f3b469b46a3" title={post.title} description={post.excerpt} image={post.cover?.src} type="article">
+<div id="smooth-wrapper" class="page-wrap">
+    <div id="smooth-content" class="smooth-content">
+      <Navbar variant="base" />
+      <div class="main">
+        <section class="blog-details-section">
+          <div class="w-layout-blockcontainer main-container w-container">
+            <div class="blog-details-content-block">
+              <div class="blog-details-header-content">
+                <div data-w-id="99a75e57-c360-0e58-f92f-7f35f9c5c2ed" style="-webkit-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="header-block width-1170px">
+                  <h1 class="display-header">{post.title}</h1>
+                </div>
+              </div>
+              <div class="blog-overview">
+                <div data-w-id="367c0aa5-114b-5662-3683-fa374fa4e3e7" style="-webkit-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="blog-image-block">{post.cover && <img src={post.cover.src} loading="lazy" alt={post.cover.alt} sizes={CMS_IMAGE_SIZES} srcset={post.cover.srcset} class="blog-details-image" />}</div>
+                <div data-w-id="d0f7121d-f4b7-d884-6b94-82eb153e2366" style="-webkit-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="blog-details-card-block">
+                  <div class="blog-card-details-content">
+                    <div class="blog-card-item">
+                      <div class="body-text-default opacity-70">Author:</div>
+                      <div class="text-large">{post.author?.name}</div>
+                    </div>
+                    <div class="blog-card-item">
+                      <div class="body-text-default opacity-70">Published:</div>
+                      <div class="text-large">{formatDate(post.date)}</div>
+                    </div>
+                    <div class="blog-card-item">
+                      <div class="body-text-default opacity-70">Category:</div>
+                      <div class="text-large">{post.category?.name}</div>
+                    </div>
+                    <div class="blog-card-item">
+                      <div class="body-text-default opacity-70">Reading Time:</div>
+                      <div class="text-large">{post.readTime}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="blog-rich-text-block">
+                <div data-w-id="22187950-4067-0c5c-06c1-dff734f56176" style="-webkit-transform:translate3d(0, 2%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 2%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 2%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 2%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="blog-rich-text w-richtext" set:html={blocksToHtml(post.content)}></div>
+              </div>
+              <div class="releated-blogs">
+                <div class="header-block vertical-align-center">
+                  <h2 class="section-header">Related Blogs</h2>
+                  <div class="animate-blur"></div>
+                </div>
+                <div class="releated-cms-block">
+                  <div class="releated-cms w-dyn-list">
+                    <div role="list" class="releated-cms-list w-dyn-items">
+  {related.map((post) => (
+    <div id="w-node-_67dd04a4-28b6-beb9-88e3-208ede1af88e-469b46a3" role="listitem" class="releated-cms-item w-dyn-item">
+      <div class="blog-cms-card">
+        <BlogCard post={post} ids={{ card: '43adac1a-5299-c238-d8b6-8d3c5794caaf', tag: '43adac1a-5299-c238-d8b6-8d3c5794cab4', header: '43adac1a-5299-c238-d8b6-8d3c5794cabb', link: '43adac1a-5299-c238-d8b6-8d3c5794cabd' }} />
+      </div>
+    </div>
+  ))}
+</div>
+{related.length === 0 && <div class="w-dyn-empty"><div>No items found.</div></div>}
+                  </div>
+                </div>
+                <div data-w-id="f1b25701-4ede-e649-257a-e3d859c9bc25" style="-webkit-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="button-block center">
+                  <a href="/blog" class="primary-button w-inline-block">
+                    <div class="button-text">See all Blogs</div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <Cta pageId="6ac8862e03365f3b469b46a3" />
+      </div>
+      <Footer />
+    </div>
+  </div>
+</BaseLayout>

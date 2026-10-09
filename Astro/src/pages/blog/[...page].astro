@@ -1,0 +1,101 @@
+---
+import type { GetStaticPaths, PaginateFunction } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import Cta from '../../components/Cta.astro';
+import BlogCard from '../../components/cards/BlogCard.astro';
+import config from '../../config/config.json';
+import { getPosts, getCategories, type Post } from '../../lib/content';
+import { categoryUrl } from '../../lib/utils';
+
+export const getStaticPaths = (async ({ paginate }: { paginate: PaginateFunction }) => {
+  const posts = await getPosts();
+  return paginate(posts, { pageSize: config.blog.postsPerPage });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props as { page: import('astro').Page<Post> };
+const categories = await getCategories();
+---
+
+<BaseLayout pageId="6ac8862e03365f3b469b46a7">
+<div id="smooth-wrapper" class="page-wrap">
+    <div id="smooth-content" class="smooth-content">
+      <Navbar variant="base" />
+      <div class="main">
+        <section class="blog-main-section">
+          <div class="w-layout-blockcontainer main-container w-container">
+            <div class="blog-main-content-block">
+              <div class="blog-main-header-content">
+                <div class="section-header-block flex-horizontal-space-between align-top">
+                  <div class="header-block width-950px">
+                    <h1 class="display-header">Read our All stories, insights, and updates</h1>
+                    <div style="-webkit-transform:translate3d(0, 0%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);display:block" class="animate-blur-display"></div>
+                  </div>
+                  <div class="header-content flex-verticle">
+                    <div data-w-id="0ce29a2f-b9f0-96f1-5fa6-c3890a06429d" style="-webkit-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="summery-block width-430px">
+                      <p class="body-text-default">Welcome to the Inkrow blog. Whether you&#x27;re into sports, tech, lifestyle, or creative thinking you&#x27;ll find content crafted to inspire, inform, and engage.</p>
+                    </div>
+                    <div class="blog-search-field-block">
+                      <form action="/search" class="search-field w-form"><input class="search-field-block w-input" maxlength="256" name="query" placeholder="Search Blogs" type="search" id="search" required=""><input type="submit" class="on-search-button w-button" value="Search"></form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="blog-page-lienr"></div>
+              <div class="all-blogs">
+                <div class="all-blog-content-block">
+                  <div data-w-id="38e8003d-5837-f100-b1b8-8d7e3a8d4d26" style="-webkit-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="blog-catagory-block">
+                    <div class="blog-catagory-cms w-dyn-list">
+                      <div role="list" class="blog-catagory-cms-list w-dyn-items">
+  {categories.map((category, i) => (
+    <div role="listitem" class="blog-catagory-cms-item w-dyn-item">
+      {i === 0 && (
+        <a href="/blog" aria-current="page" class="blog-catagory-button w-inline-block w--current">
+          <div class="blog-catagory-text">All</div>
+        </a>
+      )}
+      <a href={categoryUrl(category.slug)} class="blog-catagory-button w-inline-block">
+        <div class="blog-catagory-text">{category.name}</div>
+      </a>
+    </div>
+  ))}
+</div>
+{categories.length === 0 && <div class="w-dyn-empty"><div>No items found.</div></div>}
+                    </div>
+                  </div>
+                  <div class="all-blog-cards">
+                    <div class="all-blog-cms-wrap w-dyn-list">
+                      <div role="list" class="all-blog-cms-list w-dyn-items">
+  {page.data.map((post) => (
+    <div role="listitem" class="all-blog-cms-item w-dyn-item">
+      <div class="blog-cms-card">
+        <BlogCard post={post} ids={{ card: '0e3e25f4-ac51-6db6-42e4-1e313d683438', tag: '0e3e25f4-ac51-6db6-42e4-1e313d68343d', header: '0e3e25f4-ac51-6db6-42e4-1e313d683444', link: '0e3e25f4-ac51-6db6-42e4-1e313d683446' }} />
+      </div>
+    </div>
+  ))}
+</div>
+{page.data.length === 0 && <div class="w-dyn-empty"><div>No items found.</div></div>}
+                      {page.lastPage > 1 && (
+<div data-w-id="4eb01252-1281-23fb-1bd7-63d98a73a27e" style="-webkit-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" role="navigation" aria-label="List" class="w-pagination-wrapper pagination">
+                        {page.url.prev && (<a href={page.url.prev} aria-label="Previous Page" class="w-pagination-previous pagination-block"><img src="/images/Right-Arrow.svg" loading="lazy" alt="Right Arrow" class="pagination-icon">
+                          <div class="button-text w-inline-block">Previous</div>
+                        </a>)}
+                        {page.url.next && (<a href={page.url.next} aria-label="Next Page" class="w-pagination-next pagination-block">
+                          <div class="button-text w-inline-block">Next</div><img src="/images/Arrow-.svg" loading="lazy" alt="Right Arrow " class="pagination-icon">
+                        </a>)}
+                      </div>
+)}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <Cta pageId="6ac8862e03365f3b469b46a7" />
+      </div>
+      <Footer />
+    </div>
+  </div>
+</BaseLayout>

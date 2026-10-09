@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import Cta from '../components/Cta.astro';
+import CategoryCard from '../components/cards/CategoryCard.astro';
+import { getCategories } from '../lib/content';
+
+const categories = await getCategories();
+---
+
+<BaseLayout pageId="6ac8862e03365f3b469b46a8">
+<div id="smooth-wrapper" class="page-wrap">
+    <div id="smooth-content" class="smooth-content">
+      <Navbar variant="base" />
+      <div class="main">
+        <section class="catagories-section">
+          <div class="w-layout-blockcontainer main-container w-container">
+            <div class="catagories-content-block">
+              <div class="section-header-block flex-verticle-center">
+                <div class="header-block">
+                  <h1 class="display-header">All categories</h1>
+                  <div class="animate-blur-display"></div>
+                </div>
+              </div>
+              <div class="all-catagories">
+                <div class="all-catagories-cms-wrap w-dyn-list">
+                  <div role="list" class="all-catagories-cms-list w-dyn-items">
+  {categories.map((category) => (
+    <div role="listitem" class="all-catagories-cms-item w-dyn-item">
+      <CategoryCard category={category} />
+    </div>
+  ))}
+</div>
+{categories.length === 0 && <div class="w-dyn-empty"><div>No items found.</div></div>}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <Cta pageId="6ac8862e03365f3b469b46a8" />
+      </div>
+      <Footer />
+    </div>
+  </div>
+</BaseLayout>

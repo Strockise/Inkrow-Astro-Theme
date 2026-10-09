@@ -1,0 +1,55 @@
+{
+  "main": [
+    { "label": "Home", "url": "/" },
+    { "label": "Blogs", "url": "/blog" },
+    { "label": "Categories", "url": "/catagories" },
+    { "label": "Authors", "url": "/authors" }
+  ],
+  "pagesMenu": [
+    {
+      "title": "Pages",
+      "links": [
+        { "label": "Home V1", "url": "/" },
+        { "label": "Home V2", "url": "/home-v2" },
+        { "label": "Blogs", "url": "/blog" },
+        { "label": "Categories", "url": "/catagories" },
+        { "label": "Authors", "url": "/authors" },
+        { "label": "Contact", "url": "/contact" }
+      ]
+    },
+    {
+      "title": "Details",
+      "links": [
+        { "label": "Category Details", "url": "/blog-catagories/design" },
+        { "label": "Blog Details", "url": "/blog-post/low-code-vs-no-code-whats-best-for-you" },
+        { "label": "Author Details", "url": "/team-member/william-lee" }
+      ]
+    },
+    {
+      "title": "Utility",
+      "links": [
+        { "label": "Style Guide", "url": "/utility/style-guide" },
+        { "label": "404", "url": "/404" }
+      ]
+    }
+  ],
+  "footer": [
+    [
+      { "label": "Home V1", "url": "/" },
+      { "label": "Home V2", "url": "/home-v2" },
+      { "label": "Blog", "url": "/blog" },
+      { "label": "Categories", "url": "/catagories" },
+      { "label": "Authors", "url": "/authors" }
+    ],
+    [
+      { "label": "Contact", "url": "/contact" },
+      { "label": "Blog Details", "url": "/blog-post/low-code-vs-no-code-whats-best-for-you" },
+      { "label": "Category details", "url": "/blog-catagories/design" },
+      { "label": "Author Details", "url": "/team-member/william-lee" }
+    ],
+    [
+      { "label": "Style guide", "url": "/utility/style-guide" },
+      { "label": "404", "url": "/404" }
+    ]
+  ]
+}

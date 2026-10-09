@@ -1,0 +1,239 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import Cta from '../components/Cta.astro';
+import BlogCard from '../components/cards/BlogCard.astro';
+import CategoryCard from '../components/cards/CategoryCard.astro';
+import TeamCard from '../components/cards/TeamCard.astro';
+import FeaturedTags from '../components/cards/FeaturedTags.astro';
+import ArrowIcon from '../components/icons/ArrowIcon.astro';
+import { getPosts, getAuthors, getCategories } from '../lib/content';
+import { postUrl } from '../lib/utils';
+
+const [posts, authors, categories] = await Promise.all([getPosts(), getAuthors(), getCategories()]);
+const featured = posts.filter((p) => p.isFeatured).slice(0, 3);
+const latest = posts.slice(0, 6);
+---
+
+<BaseLayout pageId="6ac8862e03365f3b469b46a1">
+<div class="page-wrap">
+    <div class="main">
+      <div class="main-hero-block">
+        <div class="navbar-block">
+          <Navbar variant="home" />
+        </div>
+        <div data-w-id="a3596f40-2367-5aae-e24f-39875d4e5144" class="hero-main">
+          <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(1.2, 1.2, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1.2, 1.2, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1.2, 1.2, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1.2, 1.2, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="hero-bg-image"></div>
+          <section class="default-hero">
+            <div class="w-layout-blockcontainer main-container w-container">
+              <div class="default-hero-content-block">
+                <div class="hero-summery-block width-380px">
+                  <p class="body-text-default"><span style="opacity:0" class="span-line is-one">Bold ideas. Sharp insights. Inkrow </span><span style="opacity:0" class="span-line is-two">is where meaningful stories find their voice.</span></p>
+                </div>
+                <div class="hero-header-block">
+                  <h1 class="showcase-header"><span style="-webkit-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="span-text _1">I</span><span style="-webkit-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="span-text _2">n</span><span style="-webkit-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="span-text _3">k</span><span style="-webkit-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="span-text _4">r</span><span style="-webkit-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="span-text _5">o</span><span style="-webkit-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="span-text _6">w</span></h1>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div data-w-id="cc2b8ecd-6918-7606-fb09-2c1e1217fae8" class="marquee">
+        <div class="marquee-content-wrap">
+          <div class="marquee-content-block">
+            <div class="marquee-item-wrap">
+              <div class="marquee-item-block">
+                <div class="marquee-text">Share Your Voice with the World</div>
+              </div><img src="/images/Marquee-Star.svg" loading="lazy" alt="Marquee Star" class="marquee-image">
+              <div class="marquee-item-block">
+                <div class="marquee-text">Share Your Voice with the World</div>
+              </div><img src="/images/Marquee-Star.svg" loading="lazy" alt="Marquee Star" class="marquee-image">
+              <div class="marquee-item-block">
+                <div class="marquee-text">Share Your Voice with the World</div>
+              </div><img src="/images/Marquee-Star.svg" loading="lazy" alt="Marquee Star" class="marquee-image">
+              <div class="marquee-item-block">
+                <div class="marquee-text">Share Your Voice with the World</div>
+              </div><img src="/images/Marquee-Star.svg" loading="lazy" alt="Marquee Star" class="marquee-image">
+            </div>
+            <div class="marquee-item-wrap">
+              <div class="marquee-item-block">
+                <div class="marquee-text">Share Your Voice with the World</div>
+              </div><img src="/images/Marquee-Star.svg" loading="lazy" alt="Marquee Star" class="marquee-image">
+              <div class="marquee-item-block">
+                <div class="marquee-text">Share Your Voice with the World</div>
+              </div><img src="/images/Marquee-Star.svg" loading="lazy" alt="Marquee Star" class="marquee-image">
+              <div class="marquee-item-block">
+                <div class="marquee-text">Share Your Voice with the World</div>
+              </div><img src="/images/Marquee-Star.svg" loading="lazy" alt="Marquee Star" class="marquee-image">
+              <div class="marquee-item-block">
+                <div class="marquee-text">Share Your Voice with the World</div>
+              </div><img src="/images/Marquee-Star.svg" loading="lazy" alt="Marquee Star" class="marquee-image">
+            </div>
+          </div>
+        </div>
+      </div>
+      <section class="featured-blog-section">
+        <div class="w-layout-blockcontainer main-container w-container">
+          <div class="featured-blog-content-wrap">
+            <div class="featured-blog-content-block">
+              <div data-w-id="f27b739a-68b1-9126-5f69-8cdb21787c8c" style="opacity:0;-webkit-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="featured-blog-showcase-card">
+                <div class="featured-blog-showcase-content">
+                  <div class="featured-blog-header-content">
+                    <div data-w-id="197a4792-8550-a1f3-20e8-53dc4fa90d32" style="-webkit-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="featured-header-block">
+                      <div class="featured-header">Featured Blog</div>
+                    </div>
+                    <div data-w-id="24cf2492-cf04-86ac-163a-a1de438a929d" class="blog-review-s">
+                      <div class="blog-reviews-images"><img src="/images/Ellipse-1_1Ellipse-1.png" loading="lazy" style="-webkit-transform:translate3d(15%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(15%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(15%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(15%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" alt="Authors Icon" class="blog-review-image is-one"><img src="/images/Ellipse-2_1Ellipse-2.png" loading="lazy" style="-webkit-transform:translate3d(15%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(15%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(15%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(15%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" alt="Authors Icon" class="blog-review-image is-two"><img src="/images/Ellipse-3_1Ellipse-3.png" loading="lazy" style="-webkit-transform:translate3d(15%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(15%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(15%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(15%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" alt="Authors Icon" class="blog-review-image is-three"><img src="/images/Ellipse-4_1Ellipse-4.png" loading="lazy" style="-webkit-transform:translate3d(15%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(15%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(15%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(15%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" alt="Authors Icon" class="blog-review-image is-four"></div>
+                      <div style="opacity:0;-webkit-transform:translate3d(10px, null, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(10px, null, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(10px, null, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(10px, null, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="total-reviews-block">3k+<br><span class="color-grey">Review</span></div>
+                    </div>
+                  </div>
+                  <div class="featured-blog-liner"></div>
+                  <div class="featured-bottom-content">
+                    <div data-w-id="56cf518c-a1a5-0ada-73a0-36d590b82b8e" style="-webkit-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="summery-block is-blog">
+                      <p class="body-text-default white">Dive into our handpicked blog posts : trending, insightful, and worth your time.</p>
+                    </div>
+                    <div data-w-id="c5f1a71d-b212-e52f-87e6-485d58138db8" style="-webkit-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="total-blogs-block">
+                      <div class="body-text-default white">Total Blog</div>
+                      <div class="total-blog-text">5k+</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="featured-blog-list">
+                <div class="featured-blog-cms-block w-dyn-list">
+                  <div role="list" class="featured-blog-cms-list w-dyn-items">
+  {featured.map((post) => (
+    <div role="listitem" class="featured-blog-cms-item w-dyn-item">
+      <div data-w-id="480898a3-ae76-a459-78c4-ee0f9dfa2cd9" class="featured-cms-blog">
+        <div class="featured-text-content">
+          <a href={postUrl(post.slug)} class="link-header w-inline-block">
+            <div class="header-block">
+              <div class="card-header weight-400">{post.title}</div>
+            </div>
+          </a>
+          <div class="featured-blog-tags">
+            <FeaturedTags post={post} />
+          </div>
+        </div>
+        <a style="background-color:rgba(0,0,0,0);color:rgb(54,73,8)" href={postUrl(post.slug)} aria-label={post.title} class="featured-blog-button w-inline-block">
+          <div aria-label="featured-cms-blog" class="featured-arrow-icon w-embed"><ArrowIcon /></div>
+        </a>
+      </div>
+    </div>
+  ))}
+</div>
+{featured.length === 0 && <div class="w-dyn-empty"><div>No items found.</div></div>}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="popular-catagory-section">
+        <div class="w-layout-blockcontainer main-container w-container">
+          <div class="popular-catagory-content">
+            <div class="section-header-block flex-verticle-center">
+              <div class="header-block overflow-none">
+                <h2 class="section-header">Popular Category</h2>
+                <div class="animate-blur"></div>
+              </div>
+            </div>
+            <div class="catagory-cms-block w-dyn-list">
+              <div role="list" class="catagory-cms-list w-dyn-items">
+  {categories.map((category) => (
+    <div role="listitem" class="catagory-cms-item w-dyn-item">
+      <CategoryCard category={category} wId="3a19b2d0-f279-88ef-868e-11b91cdd9b72" />
+    </div>
+  ))}
+</div>
+{categories.length === 0 && <div class="w-dyn-empty"><div>No items found.</div></div>}
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="authors-section">
+        <div class="w-layout-blockcontainer main-container w-container">
+          <div class="authors-main-block">
+            <div class="author-section-content">
+              <div class="section-header-block width-480px">
+                <div class="header-block overflow-none">
+                  <h2 class="section-header">Meet the Writers</h2>
+                  <div class="animate-blur dark-khaki"></div>
+                </div>
+                <div data-w-id="c6325551-6147-75e0-f43f-f218a2c5b9a8" style="-webkit-transform:translate3d(0, 20%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 20%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 20%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 20%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="button-block top-20px">
+                  <a href="/authors" class="primary-button w-inline-block">
+                    <div class="button-text">See all Writers</div>
+                  </a>
+                </div>
+              </div>
+              <div data-w-id="75585dc5-34ca-bd17-bf1e-6655ab199193" class="author-s-loop">
+                <div data-w-id="a586d9ad-2c2c-44f1-dc0d-f835b5f07184" style="opacity:0" class="authors-slide-loop-block">
+                  <div class="authors-cms-block w-dyn-list">
+                    <div role="list" class="authors-cms-list w-dyn-items">
+  {authors.map((author) => (
+    <div role="listitem" class="authors-cms-item w-dyn-item">
+      <div class="authors-cms-card">
+        <TeamCard author={author} wId="a69e3aa9-fe65-5fca-afb7-7f3912a7720b" />
+      </div>
+    </div>
+  ))}
+</div>
+{authors.length === 0 && <div class="w-dyn-empty"><div>No items found.</div></div>}
+                  </div>
+                  <div class="authors-cms-block w-dyn-list">
+                    <div role="list" class="authors-cms-list w-dyn-items" aria-hidden="true">
+  {authors.map((author) => (
+    <div role="listitem" class="authors-cms-item w-dyn-item">
+      <div class="authors-cms-card">
+        <TeamCard author={author} wId="8fbb1ff0-7bd5-0587-a0d9-abcd5720b469" linked={false} />
+      </div>
+    </div>
+  ))}
+</div>
+{authors.length === 0 && <div class="w-dyn-empty"><div>No items found.</div></div>}
+                  </div>
+                </div>
+                <div class="authors-slide-blur is-one"></div>
+                <div class="authors-slide-blur is-two"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="blogs-section">
+        <div class="w-layout-blockcontainer main-container w-container">
+          <div class="blogs-section-content">
+            <div class="section-header-block flex-horizontal-space-between">
+              <div class="header-block overflow-none">
+                <h2 class="section-header">Our Latest Blogs</h2>
+                <div class="animate-blur"></div>
+              </div>
+              <div data-w-id="7ab67fb9-bfbf-3fcb-a2c6-6930fd306f76" style="-webkit-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="button-block">
+                <a href="/blog" class="primary-button w-inline-block">
+                  <div class="button-text">See all Blogs</div>
+                </a>
+              </div>
+            </div>
+            <div class="recent-blogs">
+              <div class="blog-cms-block w-dyn-list">
+                <div role="list" class="blog-cms-list w-dyn-items">
+  {latest.map((post) => (
+    <div role="listitem" class="blog-cms-item w-dyn-item">
+      <div class="blog-cms-card">
+        <BlogCard post={post} ids={{ card: 'ad5c2af6-1987-f8f1-2de2-f6c29884b144', tag: '9439bed2-8a93-c47d-2168-c1556442b5a5', header: '66c0571b-44e5-60d0-a7a2-a5ec7bce9dfd', link: 'ea9ca544-95b6-c9ae-619c-f84c906ab0dc' }} />
+      </div>
+    </div>
+  ))}
+</div>
+{latest.length === 0 && <div class="w-dyn-empty"><div>No items found.</div></div>}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <Cta pageId="6ac8862e03365f3b469b46a1" />
+    </div>
+    <Footer />
+  </div>
+</BaseLayout>

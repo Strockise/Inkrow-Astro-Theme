@@ -1,0 +1,38 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ArrowIcon from '../icons/ArrowIcon.astro';
+import { ix, CMS_IMAGE_SIZES } from '../../lib/ix';
+import { postUrl, categoryUrl, formatDate } from '../../lib/utils';
+
+interface Props {
+  post: CollectionEntry<'articles'>['data'];
+  /** Webflow interaction element ids – each page animates its own copy of the card. */
+  ids: { card: string; tag: string; header: string; link: string };
+}
+
+const { post, ids } = Astro.props;
+const href = postUrl(post.slug);
+---
+
+<div data-w-id={ids.card} style={ix.up10} class="blog-card-content">
+  <a href={href} class="blog-card-image-block w-inline-block">{post.cover && <img src={post.cover.src} loading="lazy" alt={post.cover.alt} sizes={CMS_IMAGE_SIZES} srcset={post.cover.srcset} class="blog-card-image" />}</a>
+  <div class="blog-card-main-content">
+    <div class="blog-card-text-content">
+      <div data-w-id={ids.tag} style={ix.up10} class="blog-card-tag">
+        <div class="blog-card-text">{formatDate(post.date)}</div>
+        <div class="blog-card-circle"></div>
+        {post.category && <a href={categoryUrl(post.category.slug)} class="blog-card-text tag">{post.category.name}</a>}
+        <div class="blog-card-circle"></div>
+        <div class="blog-card-text">{post.readTime}</div>
+      </div>
+      <a href={href} class="link-header w-inline-block">
+        <div data-w-id={ids.header} style={ix.up25} class="header-block">
+          <div class="header-small">{post.title}</div>
+        </div>
+      </a>
+    </div>
+    <a data-w-id={ids.link} style={ix.up25} href={href} aria-label={post.title} class="blog-card-link-block w-inline-block">
+      <div aria-label="blog-card-arrow" class="blog-card-arrow w-embed"><ArrowIcon /></div>
+    </a>
+  </div>
+</div>

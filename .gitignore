@@ -1,0 +1,25 @@
+# Source material used for the conversion – not part of the theme
+/Template/
+/CMS/
+/SKILL.md
+
+# Dependencies, builds, local env
+node_modules/
+dist/
+.astro/
+.vercel/
+.env
+.env.*
+!.env.example
+
+# Strapi runtime data
+/Strapi/.tmp/
+/Strapi/.strapi/
+/Strapi/public/uploads/*
+!/Strapi/public/uploads/.gitkeep
+
+# Strapi media copied into the Astro build
+/Astro/public/uploads/
+
+.DS_Store
+Thumbs.db

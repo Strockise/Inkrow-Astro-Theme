@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import { getPosts } from '../lib/content';
+import { postUrl } from '../lib/utils';
+
+// Static replacement for Webflow site search: every article is rendered (hidden) and filtered client-side by ?query=
+const posts = await getPosts();
+const site = Astro.site ?? Astro.url;
+---
+
+<BaseLayout pageId="6ac8862e03365f3b469b46af" title="Search Results" noindex>
+<Navbar variant="base" />
+  <div class="search-content">
+    <div class="main-container w-container">
+      <h2>Search results</h2>
+      <form action="/search" class="w-form"><label for="search" class="search-label">Search</label><input class="search-main-field w-input" maxlength="256" name="query" placeholder="Search…" type="search" id="search" required="" /><input type="submit" class="search-conform-button w-button" value="Search" /></form>
+      <div>
+        <div class="search-result-items" data-search-results>
+          {posts.map((post) => (
+            <div class="search-item" hidden data-search-text={[post.title, post.excerpt, post.category?.name, post.author?.name].filter(Boolean).join(' ').toLowerCase()}>
+              <a href={postUrl(post.slug)} class="search-text">{post.title}</a>
+              <div>{new URL(postUrl(post.slug), site).host + postUrl(post.slug)}</div>
+              <p>{post.excerpt}</p>
+            </div>
+          ))}
+        </div>
+        <div class="search-result-empty" data-search-empty hidden>
+          <p>No results found.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  const query = (new URLSearchParams(location.search).get('query') ?? '').trim().toLowerCase();
+  const input = document.querySelector<HTMLInputElement>('#search');
+  if (input) input.value = query;
+  const terms = query.split(/\s+/).filter(Boolean);
+  let shown = 0;
+  document.querySelectorAll<HTMLElement>('[data-search-text]').forEach((item) => {
+    const match = terms.length > 0 && terms.every((t) => item.dataset.searchText!.includes(t));
+    item.hidden = !match;
+    if (match) shown++;
+  });
+  const empty = document.querySelector<HTMLElement>('[data-search-empty]');
+  if (empty) empty.hidden = shown > 0 || terms.length === 0;
+</script>

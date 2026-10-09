@@ -1,0 +1,41 @@
+---
+interface Props {
+  /** Same value as the page's BaseLayout `pageId`; Webflow forms read it from the form element. */
+  pageId: string;
+}
+
+const { pageId } = Astro.props;
+---
+
+<section class="cta-section">
+  <div class="w-layout-blockcontainer main-container w-container">
+    <div data-w-id="1b070671-6fc9-12b2-0f52-e3f1b7d8a1f1" class="cta-block">
+      <div class="cta-content">
+        <div class="cta-grid">
+          <div class="cta-main-content">
+            <div class="cta-inner">
+              <div class="section-header-block flex-verticle-center">
+                <div data-w-id="1b070671-6fc9-12b2-0f52-e3f1b7d8a1f7" class="header-block">
+                  <h2 class="section-header">Stay Updated<br />with Inkrow</h2>
+                </div>
+                <div data-w-id="1b070671-6fc9-12b2-0f52-e3f1b7d8a1fa" class="summery-block">
+                  <p class="body-text-default">Join our mailing list and never miss a story.</p>
+                </div>
+              </div>
+              <div data-w-id="1b070671-6fc9-12b2-0f52-e3f1b7d8a1fd" class="cta-form-block w-form">
+                <form id="email-form" name="email-form" data-name="Email Form" method="get" class="cta-form" data-wf-page-id={pageId} data-wf-element-id="1b070671-6fc9-12b2-0f52-e3f1b7d8a1fe"><input class="cta-text-field w-input" maxlength="256" name="name" data-name="Name" placeholder="Enter your email address" type="email" id="name" required="" /><input type="submit" data-wait="Please wait..." class="submit-button w-button" value="Subscribe" /></form>
+                <div class="form-succes-message w-form-done">
+                  <div class="form-message-text">Thank you! Your submission has been received!</div>
+                </div>
+                <div class="form-error-message w-form-fail">
+                  <div class="form-message-text">Oops! Something went wrong while submitting the form.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cta-bg"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
