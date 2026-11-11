@@ -71,7 +71,7 @@ The site is static: after you publish changes in Strapi, rebuild the site. A Str
 ```
 src/
 ├── config/
-│   ├── config.json        # site title, description, contact email, credits, posts per page
+│   ├── config.json        # site title, description, contact email, form endpoint, credits, posts per page
 │   └── menu.json          # navbar, "Pages" dropdown and footer links
 ├── content.config.ts      # Strapi-backed content collections (articles, authors, categories)
 ├── layouts/BaseLayout.astro
@@ -98,7 +98,7 @@ The interactions (navbar, dropdowns, FAQ, scroll reveals, hover effects, marquee
 
 ### Forms
 
-The newsletter and contact forms keep the original markup and success/error states. A static site has no form backend, so connect them to a form service (Formspree, Netlify Forms, Basin, …) by setting the form's `action`.
+The newsletter and contact forms keep the original markup and success/error states. A static site has no form backend, so connect them to a form service (Formspree, Basin, Getform, …) by setting `forms.endpoint` in `src/config/config.json`. Both forms are then sent to that URL as a `POST`. While `endpoint` is empty, which is how the demo ships, a submitted form only shows its success message and nothing is sent anywhere.
 
 ## Customising
 

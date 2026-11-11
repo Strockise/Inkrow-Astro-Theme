@@ -9,6 +9,9 @@
   "contact": {
     "email": "hello@example.com"
   },
+  "forms": {
+    "endpoint": ""
+  },
   "credits": {
     "poweredBy": { "label": "Astro", "url": "https://astro.build/" }
   },
