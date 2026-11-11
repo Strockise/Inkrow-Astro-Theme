@@ -2,10 +2,52 @@
  * Minimal Strapi v5 REST client used by the content collections (src/content.config.ts).
  * Data is fetched once at build time (or on dev-server start / content sync).
  */
-import { existsSync } from 'node:fs';
-import { mkdir, writeFile } from 'node:fs/promises';
+import { existsSync, readFileSync } from 'node:fs';
+import { copyFile, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { STRAPI_URL, STRAPI_TOKEN, STRAPI_DOWNLOAD_MEDIA } from 'astro:env/server';
+
+/** Demo content that ships with the CMS (Strapi/data). Used when Strapi cannot be reached. */
+const SEED_DIR = path.resolve(process.cwd(), '..', 'Strapi', 'data');
+const SEED_PREFIX = 'seed:';
+let seedNoticeShown = false;
+
+interface SeedData {
+  categories: { slug: string; name: string; summary: string; isPopular: boolean }[];
+  authors: ({ slug: string; name: string; avatar: string } & Record<string, unknown>)[];
+  articles: ({ slug: string; title: string; date: string; cover: string; category: string; author: string } & Record<string, unknown>)[];
+}
+
+/**
+ * Returns a collection from Strapi/data/seed.json, shaped like the Strapi REST response.
+ * seed.json is ordered oldest -> newest, matching the order Strapi creates the entries in.
+ */
+function fromSeed(endpoint: string): unknown[] | null {
+  const file = path.join(SEED_DIR, 'seed.json');
+  if (!existsSync(file)) return null;
+  if (!seedNoticeShown) {
+    console.warn(`[inkrow] Strapi is not reachable at ${base} – building with the demo content from ${file}`);
+    seedNoticeShown = true;
+  }
+  const seed = JSON.parse(readFileSync(file, 'utf8')) as SeedData;
+  const media = (name: string): StrapiMedia => ({ url: `${SEED_PREFIX}${name}` });
+  const pick = <T extends { slug: string; name: string }>(list: T[], slug: string) => {
+    const item = list.find((i) => i.slug === slug);
+    return item ? { slug: item.slug, name: item.name } : null;
+  };
+  switch (endpoint) {
+    case 'categories':
+      return [...seed.categories].reverse();
+    case 'authors':
+      return [...seed.authors].reverse().map((a) => ({ ...a, avatar: media(a.avatar) }));
+    case 'articles':
+      return [...seed.articles]
+        .sort((a, b) => b.date.localeCompare(a.date))
+        .map((a) => ({ ...a, cover: media(a.cover), category: pick(seed.categories, a.category), author: pick(seed.authors, a.author) }));
+    default:
+      return null;
+  }
+}
 
 export interface StrapiMedia {
   url: string;
@@ -29,6 +71,8 @@ export async function fetchAll<T>(endpoint: string, query: Record<string, string
     try {
       res = await fetch(url, { headers: STRAPI_TOKEN ? { Authorization: `Bearer ${STRAPI_TOKEN}` } : {} });
     } catch (error) {
+      const seeded = page === 1 ? fromSeed(endpoint) : null;
+      if (seeded) return seeded as T[];
       throw new Error(`Could not reach Strapi at ${base}. Is it running? (cd Strapi && npm run develop)`, { cause: error });
     }
     if (!res.ok) {
@@ -52,6 +96,11 @@ const pending = new Map<string, string>();
  * Strapi's local upload provider returns relative URLs; cloud providers return absolute ones.
  */
 export function mediaUrl(url: string) {
+  if (url.startsWith(SEED_PREFIX)) {
+    const name = url.slice(SEED_PREFIX.length);
+    pending.set(`/uploads/${name}`, path.join(SEED_DIR, 'uploads', name));
+    return `/uploads/${encodeURIComponent(name)}`;
+  }
   const absolute = /^https?:\/\//.test(url) ? url : `${base}${url}`;
   if (!STRAPI_DOWNLOAD_MEDIA) return absolute;
   const local = `/uploads/${decodeURIComponent(new URL(absolute).pathname.split('/').pop()!)}`;
@@ -66,6 +115,7 @@ export async function downloadMedia() {
   const jobs = [...pending].map(async ([local, remote]) => {
     const file = path.join(dir, path.basename(local));
     if (existsSync(file)) return;
+    if (!/^https?:\/\//.test(remote)) return copyFile(remote, file);
     const res = await fetch(remote);
     if (!res.ok) throw new Error(`Could not download ${remote}: ${res.status}`);
     await writeFile(file, Buffer.from(await res.arrayBuffer()));

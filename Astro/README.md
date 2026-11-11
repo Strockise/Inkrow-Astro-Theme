@@ -49,6 +49,10 @@ npm run dev         # http://localhost:4321
 
 The variables are validated by `astro:env` (see `astro.config.mjs`). Nothing secret is committed.
 
+If Strapi can't be reached at build time, the site falls back to the demo content that ships with the CMS (`../Strapi/data/seed.json` and `../Strapi/data/uploads`) and logs a warning. This lets you preview the theme without running Strapi, and it is how the live demo is built. Strapi errors such as a 401/403 still fail the build.
+
+To deploy on Vercel, import the repository as is. The root `vercel.json` builds the `Astro/` folder and publishes `Astro/dist`.
+
 ## Content model (Strapi)
 
 | Type         | Fields                                                                                                     |
