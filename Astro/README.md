@@ -109,7 +109,7 @@ The newsletter and contact forms keep the original markup and success/error stat
 - **Site name, description, email:** `src/config/config.json`
 - **Navigation:** `src/config/menu.json`
 - **Styles:** `public/css/inkrow.css`
-- **Open Graph image:** `public/images/og-image.webp`
+- **Open Graph image:** `public/images/og-image.jpg`
 
 ## Deploying
 
