@@ -113,7 +113,7 @@ The newsletter and contact forms keep the original markup and success/error stat
 
 ## Deploying
 
-Build with `npm run build` and deploy `dist/` to any static host. Set `STRAPI_URL` (and `STRAPI_TOKEN` if used) in the host's build environment. Strapi must be reachable from the build machine, and its uploads URL must be public, because images load from Strapi.
+Build with `npm run build` and deploy `dist/` to any static host. Set `STRAPI_URL` (and `STRAPI_TOKEN` if used) in the host's build environment. Strapi must be reachable from the build machine. Images are copied into the build, so Strapi doesn't need to stay online for visitors. If Strapi can't be reached, the build uses the bundled demo content. See the [root README](../README.md#deploying) for settings for each host.
 
 ## Credits
 
